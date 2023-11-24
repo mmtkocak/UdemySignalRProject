@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.AboutDto;
 using SignalR.EntityLayer.Entities;
@@ -19,7 +18,7 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult AboutList()
         {
-            var values=_aboutService.TGetListAll();
+            var values = _aboutService.TGetListAll();
             return Ok(values);
         }
         [HttpPost]
@@ -34,10 +33,10 @@ namespace SignalRApi.Controllers
             _aboutService.TAdd(about);
             return Ok("Hakkımda Kısmı Başarılı Bir Şekilde Eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id)
         {
-            var value=_aboutService.TGetByID(id);
+            var value = _aboutService.TGetByID(id);
             _aboutService.TDelete(value);
             return Ok("Hakkımda Alanı Silindi");
         }
@@ -56,7 +55,7 @@ namespace SignalRApi.Controllers
             return Ok("Hakkımda Alanı Güncellendi");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);

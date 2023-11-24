@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUI.Dtos.CategoryDtos;
+using SignalRWebUI.Dtos.BookingDtos;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
-    public class CategoryController : Controller
+    public class BookingController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public CategoryController(IHttpClientFactory httpClientFactory)
+        public BookingController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -17,18 +17,18 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7020/api/Category");
+            var responseMessage = await client.GetAsync("https://localhost:7020/api/Booking");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultBookingDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult CreateCategory()
+        public IActionResult CreateBooking()
         {
             return View();
         }
@@ -36,13 +36,13 @@ namespace SignalRWebUI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
+        public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
         {
-            createCategoryDto.Status = true;
+
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createCategoryDto);
+            var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7020/api/Category", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7020/api/Booking", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -50,10 +50,10 @@ namespace SignalRWebUI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> DeleteCategory(int id)
+        public async Task<IActionResult> DeleteBooking(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7020/api/Category/{id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7020/api/Booking/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -63,26 +63,26 @@ namespace SignalRWebUI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> UpdateCategory(int id)
+        public async Task<IActionResult> UpdateBooking(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7020/api/Category/{id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7020/api/Booking/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
+                var values = JsonConvert.DeserializeObject<UpdateBookingDto>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData=JsonConvert.SerializeObject(updateCategoryDto);
-            StringContent stringContent= new StringContent(jsonData,Encoding.UTF8,"application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7020/api/Category/", stringContent);
+            var jsonData = JsonConvert.SerializeObject(updateBookingDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("https://localhost:7020/api/Booking/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
