@@ -28,10 +28,52 @@ namespace SignalRApi.Controllers
             return Ok(value);
         }
 
+        [HttpGet("ProductCount")]
+        public IActionResult ProductCount()
+        {
+            return Ok(_productService.TProductCount());
+        }
+
+        [HttpGet("ProductCountByDrink")]
+        public IActionResult ProductCountByDrink()
+        {
+            return Ok(_productService.TProductCountByCategoryNameDrink());
+        }
+
+
+        [HttpGet("ProductCountByHamburger")]
+        public IActionResult ProductCountByHamburger()
+        {
+            return Ok(_productService.TProductCountByCategoryNameHamburger());
+        }
+
+
+        [HttpGet("ProductPriceAvg")]
+        public IActionResult ProductPriceAvg()
+        {
+            return Ok(_productService.TProductPriceAvg());
+        }
+
+
+
+        [HttpGet("ProductNameByMaxPrice")]
+        public IActionResult ProductNameByMaxPrice()
+        {
+            return Ok(_productService.TProductNameByMaxPrice());
+        }
+
+
+        [HttpGet("ProductNameByMinPrice")]
+        public IActionResult ProductNameByMinPrice()
+        {
+            return Ok(_productService.TProductNameByMinPrice());
+        }
+
+
         [HttpGet("ProductListWithCategory")]
         public IActionResult ProductListWithCategory()
         {
-           var context=new SignalRContext();
+            var context = new SignalRContext();
             var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
             {
                 Description = y.Description,
@@ -40,7 +82,7 @@ namespace SignalRApi.Controllers
                 ProductID = y.ProductID,
                 ProductName = y.ProductName,
                 ProductStatus = y.ProductStatus,
-                CategoryName=y.Category.Name
+                CategoryName = y.Category.Name
             });
             return Ok(values.ToList());
         }
@@ -56,8 +98,8 @@ namespace SignalRApi.Controllers
                 Price = createProductDto.Price,
                 ProductName = createProductDto.ProductName,
                 ProductStatus = createProductDto.ProductStatus,
-                CategoryID=createProductDto.CategoryID
-                
+                CategoryID = createProductDto.CategoryID
+
             });
             return Ok("Ürün Eklendi");
         }
@@ -88,7 +130,7 @@ namespace SignalRApi.Controllers
                 ProductName = updateProductDto.ProductName,
                 ProductStatus = updateProductDto.ProductStatus,
                 ProductID = updateProductDto.ProductID,
-                CategoryID=updateProductDto.CategoryID
+                CategoryID = updateProductDto.CategoryID
             });
             return Ok("Ürün Güncellendi");
         }
