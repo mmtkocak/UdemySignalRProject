@@ -54,5 +54,12 @@ namespace SignalR.DataAccessLayer.EntityFramework
             using var context = new SignalRContext();
             return context.Products.Average(x => x.Price);
         }
+
+        public decimal ProductAvgPriceByHamburger()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.Name == "Hamburger")
+            .Select(z => z.CategoryID).FirstOrDefault())).Average(w => w.Price);
+        }
     }
 }
