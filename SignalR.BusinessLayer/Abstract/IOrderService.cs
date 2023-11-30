@@ -8,5 +8,7 @@ namespace SignalR.BusinessLayer.Abstract
         int TActiveOrderCount();
 
         decimal TLastOrderPrice();
+
+        decimal TTodayTotalPrice();
     }
 }
