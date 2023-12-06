@@ -10,10 +10,10 @@
                             Bize Ulaşın
                         </h4>
                         <div class="contact_link_box">
-                            <a href="@item.Location" target="_blank">
+                            <a href="@item.Location">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 <span>
-                                    Konum
+                                    Lokasyon
                                 </span>
                             </a>
                             <a href="">
@@ -39,18 +39,7 @@
                         <p>
                             @item.FooterDescription
                         </p>
-                        <div class="footer_social">
-                            <a href="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-
-                        </div>
+                        @await Component.InvokeAsync("_UILayoutSocialMediaComponentPartial")
                     </div>
                 </div>
                 <div class="col-md-4 footer-col">
@@ -66,8 +55,11 @@
                 </div>
             </div>
             <div class="footer-info">
-                <p>&copy; SignalR Restoran - <span id="displayYear"></span> Develop By
-                    <a href="https://github.com/mmtkocak" target="_blank">MKOCAK</a>
+                <p>
+                    &copy; <span id="displayYear"></span> Tüm Hakları Saklıdır.
+                    <a href="https://html.design/">SignalR Restoran</a><br><br>
+                    &copy; <span id="displayYear"></span> Geliştiren
+                    <a href="https://github.com/mmtkocak" target="_blank">Mehmet KOÇAK</a>
                 </p>
             </div>
         </div>
