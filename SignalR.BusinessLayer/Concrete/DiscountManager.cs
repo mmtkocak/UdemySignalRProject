@@ -43,6 +43,11 @@ namespace SignalR.BusinessLayer.Concrete
             return _discountDal.GetListAll();
         }
 
+        public List<Discount> TGetListByStatusTrue()
+        {
+            return _discountDal.GetListByStatusTrue();
+        }
+
         public void TUpdate(Discount entity)
         {
             _discountDal.Update(entity);
