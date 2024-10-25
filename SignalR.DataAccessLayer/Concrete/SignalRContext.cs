@@ -8,7 +8,7 @@ namespace SignalR.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=WEB;initial Catalog=SignalRDb; integrated Security=true");
+            optionsBuilder.UseSqlServer("Server=MEHMET;initial Catalog=SignalRDb; integrated Security=true");
         }
 
         public DbSet<About> Abouts { get; set; }
