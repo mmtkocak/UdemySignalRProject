@@ -68,5 +68,12 @@ namespace SignalR.DataAccessLayer.EntityFramework
             return context.Products.Where(x => x.ProductName == "Steak Burger").Select(y => y.Price).FirstOrDefault();
 
         }
+
+        public List<Product> GetLast9Products()
+        {
+            var context = new SignalRContext();
+            var values= context.Products.Take(9).ToList();
+            return values;
+        }
     }
 }
